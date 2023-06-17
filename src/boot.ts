@@ -1,8 +1,11 @@
 import { config } from '@/configs'
 import { createProducer } from '@/lib/queue'
 
-// queues
-createProducer(config.queue.email.name, config.redis)
+// example queues
+// Inline name
+createProducer('test')
+// name from config
+createProducer(config.queue.email.name)
 
 // get the controllers
 import '@/controllers/health'

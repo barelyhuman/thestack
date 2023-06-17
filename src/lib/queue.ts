@@ -1,28 +1,28 @@
+import { config } from '@/configs'
 import Bull from 'bull'
 
-const queueRegister = new Map()
-
-export function createProducer(name: string, options: any) {
+export function createProducer(name: string) {
   const bull = new Bull(name, {
-    redis: options,
+    redis: config.redis,
   })
-  queueRegister.set(name, bull)
   return bull
 }
 
 export function emitToQueue(queueName: string, data: any) {
-  const q = queueRegister.get(queueName)
-  q.add(data)
-  queueRegister.set(queueName, q)
+  const bull = new Bull(queueName, {
+    redis: config.redis,
+  })
+  bull.add(data)
 }
 
 export function listen(queueName: string, queueType: string) {
   return (target: any, pk: string) => {
-    const q = queueRegister.get(queueName)
-    q &&
-      q.process(async (job: any) => {
-        if (job.data.type !== queueType) return
-        return await target[pk](job)
-      })
+    const bull = new Bull(queueName, {
+      redis: config.redis,
+    })
+    bull.process(async (job: any) => {
+      if (job.data.type !== queueType) return
+      return await target[pk](job)
+    })
   }
 }

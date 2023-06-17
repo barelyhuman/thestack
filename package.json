@@ -5,6 +5,7 @@
   "packageManager": "pnpm@8.3.1",
   "scripts": {
     "dev": "npx tsnd --exit-child -r tsconfig-paths/register src/server.ts",
+    "dev:worker": "npx tsnd --exit-child -r tsconfig-paths/register src/worker.ts",
     "start": "npx ts-node --transpileOnly -r tsconfig-paths/register src/server.ts",
     "test:types": "tsc",
     "fix": "npx pretty-quick",

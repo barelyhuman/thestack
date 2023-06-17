@@ -14,12 +14,6 @@ export default class Auth {
     })
   }
 
-  @listen(config.queue.email.name, config.queue.email.types.loginEmail)
-  async handleEmail(job: any) {
-    const toEmail = job.data.email
-    await sendEmail(toEmail)
-  }
-
   @get('/auth/verify')
   verify(req: Request, res: Response) {}
 
