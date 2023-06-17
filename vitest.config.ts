@@ -1,5 +1,5 @@
 /// <reference types="vitest" />
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   test: {
@@ -7,4 +7,4 @@ export default defineConfig({
       '@/': new URL('./src/', import.meta.url).pathname,
     },
   },
-});
+})

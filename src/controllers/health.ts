@@ -1,5 +1,5 @@
-import { get } from '@/lib/router';
-import type { Response, Request } from 'express';
+import { get } from '@/lib/router'
+import type { Response, Request } from 'express'
 
 export default class Health {
   @get('/ping')
@@ -7,6 +7,6 @@ export default class Health {
     return res.send({
       success: true,
       now: new Date().toISOString(),
-    });
+    })
   }
 }

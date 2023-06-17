@@ -1,6 +1,6 @@
-import { del, get, post } from '@/lib/router';
-import { auth } from '@/middlewares/auth';
-import type { Request, Response } from 'express';
+import { del, get, post } from '@/lib/router'
+import { auth } from '@/middlewares/auth'
+import type { Request, Response } from 'express'
 
 export default class Project {
   @post('/project', [auth])
