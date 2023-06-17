@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  redis:
+    restart: always
+    command: 'redis-server --save 20 1 --loglevel warning --requirepass $REDIS_PASSWORD'
+    image: redis
+    env_file:
+      - .env
+    ports:
+      - '6379:6379'
+    expose:
+      - 6379
+    volumes:
+      - redis:/data
+
+  # Enable to debug queues
+  # bullboard:
+  #   image: deadly0/bull-board
+  #   restart: always
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     REDIS_HOST: redis
+  #     REDIS_PORT: 6379
+  #     REDIS_PASSWORD: 'examplepassword'
+  #     REDIS_USE_TLS: 'false'
+  #     BULL_VERSION: 'bull'
+  #   depends_on:
+  #     - redis
+
+volumes:
+  redis:
+    driver: local
