@@ -5,4 +5,4 @@ dist
 prisma/*.db
 
 .env*
-!env.example
+!.env.example

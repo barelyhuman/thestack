@@ -1,0 +1,33 @@
+@layout('layouts/base')
+@set('title', 'Home page')
+
+
+
+@section('body')
+
+<form action="/login" method="POST">
+<r-grid columns=6>
+  <r-cell span=row>
+    <div>
+      <label>Email</label>
+      <div>
+        <input name="email" placeholder="email@email.com">
+      </div>
+    </div>
+  </r-cell>
+  <r-cell span=row>
+    <div>
+      <label>Password</label>
+      <div>
+        <input type="password" name="password" placeholder="somethingSecret@123">
+      </div>
+    </div>
+  </r-cell>
+  <r-cell>
+    <button>Login &rarr;</button>
+  </r-cell>
+</r-grid>
+</form>
+
+
+@end

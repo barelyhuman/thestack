@@ -1,3 +1,7 @@
+import { config } from 'dotenv'
+
+config()
+
 import '@/boot'
 import { client as redisClient } from '@/lib/redis'
 import { router } from '@/lib/router'
@@ -8,13 +12,19 @@ import express, { NextFunction, Request, Response } from 'express'
 import expressLimiter from 'express-limiter'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import { emitToQueue } from './lib/queue'
+import serveStatic from 'serve-static'
+import { emitToQueue } from '@/lib/queue'
+import path from 'path'
+import engine from 'express-edge'
 
 export const app = express()
 
 export const initApp = ({ db }) => {
   // TODO: configure proper cors here
   app.use(cors())
+
+  app.use(engine)
+  app.set('views', path.join(__dirname, 'views'))
 
   // Common defaults
   app.use(morgan('tiny'))
@@ -28,6 +38,8 @@ export const initApp = ({ db }) => {
       },
     })
   )
+
+  app.use('/public', serveStatic(path.join(__dirname, './public')))
 
   // Basic Rate limiter
   // TODO: change in the lookup and

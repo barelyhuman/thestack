@@ -8,5 +8,6 @@ createProducer('test')
 createProducer(config.queue.email.name)
 
 // get the controllers
+import '@/controllers/home'
 import '@/controllers/health'
 import '@/controllers/auth'

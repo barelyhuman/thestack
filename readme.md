@@ -23,6 +23,7 @@ class Auth {
 - Migrations (prisma)
 - Queue (bull + redis)
 - Decorators for Queue Handling based on Worker execution
+- View Engine ( Edge Template from Adonis )
 
 ```ts
 class User {
