@@ -1,0 +1,24 @@
+@import url('https://rsms.me/raster/raster2.css?v=20');
+
+:root {
+  --font-mono: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console,
+    monospace;
+  --base: #fff;
+  --text: #343a40;
+
+  --foreground-color: var(--text);
+}
+
+pre {
+  padding: 10px;
+  font-family: var(--font-mono);
+}
+
+.hljs {
+  white-space: pre-wrap;
+}
+
+#search-container{
+    display:flex;
+    justify-content: flex-end;
+}

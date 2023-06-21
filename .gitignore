@@ -6,3 +6,5 @@ prisma/*.db
 
 .env*
 !.env.example
+
+docs_dist
