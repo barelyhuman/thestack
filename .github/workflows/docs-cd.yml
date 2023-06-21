@@ -22,7 +22,7 @@ jobs:
           install linux-amd64/mudkip /usr/local/bin
       - name: Build
         run: |
-          mudkip -baseurl="/thestack" -o='docs_dist' --stylesheet='docs/styles.css'
+          mudkip --baseurl="/thestack/" -o='docs_dist' --stylesheet='docs/styles.css'
       - uses: actions/upload-pages-artifact@v1
         with:
           path: "./docs_dist"
