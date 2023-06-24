@@ -47,10 +47,37 @@ class EmailQueueHandler {
 ```
 
 - Compose (Self host services for dev / k8s)
+- Fully Docker compatible
+- Testing Mocks (Redis)
+- Swagger Doc generation using JSDoc -
+  [Documentation](https://brikev.github.io/express-jsdoc-swagger-docs/#/)
 
+```js
+  /**
+   *
+   * GET /api/ping
+   * @summary quickly check if the server is running or not
+   * @returns 200 - success - application/json
+   */
+  @get('/api/ping')
+  ping(req: Request, res: Response) {
+    req.pushToQueue('test', {
+      type: '',
+    })
+    return res.send({
+      success: true,
+      now: new Date().toISOString(),
+    })
+  }
+```
+
+-
 
 ## Why?
-Various reasons...., [this might be relevant](https://reaper.is/writing/20230516-ignoring-backend-productivity)
+
+Various reasons....,
+[this might be relevant](https://reaper.is/writing/20230516-ignoring-backend-productivity)
 
 ## License
+
 [MIT](/LICENSE)
