@@ -18,7 +18,7 @@ beforeAll(async () => {
 
 describe('Ping', () => {
   it('should get value from ping', async () => {
-    const result = await tCtx.fetcher.get('/ping')
+    const result = await tCtx.fetcher.get('/api/ping')
     expect(Object.keys(result.data)).toMatchInlineSnapshot(`
       [
         "success",
