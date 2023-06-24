@@ -3,7 +3,7 @@ import { config as loadEnv } from 'dotenv'
 loadEnv()
 
 import '@/boot'
-import { emitToQueue } from '@/lib/queue'
+import { pushToQueue } from '@/lib/queue'
 import { client as redisClient } from '@/lib/redis'
 import { router } from '@/lib/router'
 import bodyParser from 'body-parser'
@@ -66,6 +66,6 @@ export const initApp = ({ db }) => {
 
 const extender = db => (req: Request, res: Response, n: NextFunction) => {
   req.db = db
-  req.pushToQueue = emitToQueue
+  req.pushToQueue = pushToQueue
   n()
 }

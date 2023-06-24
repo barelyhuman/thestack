@@ -1,12 +1,3 @@
-<br />
-
-[About](%baseurl%)  
-[Getting Started](%baseurl%getting-started)
-
-<br />
-
----
-
 # Getting Started
 
 ## Using the Template

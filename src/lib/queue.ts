@@ -8,7 +8,7 @@ export function createProducer(name: string) {
   return bull
 }
 
-export function emitToQueue(queueName: string, data: any) {
+export function pushToQueue(queueName: string, data: any) {
   const bull = new Bull(queueName, {
     redis: config.redis,
   })

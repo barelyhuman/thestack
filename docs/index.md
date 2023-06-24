@@ -1,12 +1,3 @@
-<br />
-
-[About](%baseurl%)  
-[Getting Started](%baseurl%getting-started)
-
-<br />
-
----
-
 # The Stack
 
 > Get out of the hype train
