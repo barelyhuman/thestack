@@ -1,8 +1,9 @@
-import { config } from 'dotenv'
+import { config as loadEnv } from 'dotenv'
 
-config()
+loadEnv()
 
 import '@/boot'
+import { emitToQueue } from '@/lib/queue'
 import { client as redisClient } from '@/lib/redis'
 import { router } from '@/lib/router'
 import bodyParser from 'body-parser'
@@ -12,10 +13,10 @@ import express, { NextFunction, Request, Response } from 'express'
 import expressLimiter from 'express-limiter'
 import helmet from 'helmet'
 import morgan from 'morgan'
-import serveStatic from 'serve-static'
-import { emitToQueue } from '@/lib/queue'
 import path from 'path'
-import engine from 'express-edge'
+import serveStatic from 'serve-static'
+import cookieParser from 'cookie-parser'
+import { initDocs } from './docs'
 
 export const app = express()
 
@@ -23,14 +24,13 @@ export const initApp = ({ db }) => {
   // TODO: configure proper cors here
   app.use(cors())
 
-  app.use(engine)
-  app.set('views', path.join(__dirname, 'views'))
-
   // Common defaults
+  app.disable('x-powered-by')
   app.use(morgan('tiny'))
   app.use(helmet())
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
+  app.use(cookieParser())
   app.use(
     compression({
       filter: (req, res) => {
@@ -55,6 +55,8 @@ export const initApp = ({ db }) => {
       expire: 1000 * 60 * 5,
     })
   )
+
+  initDocs(app)
 
   app.use(extender(db))
   app.use(router)
