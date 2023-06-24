@@ -2,7 +2,7 @@
 
 Booting the app actually goes through the `boot.ts` file first. This is where
 you will be adding the [Controllers](%baseurl%controllers) and
-[Job Queues](%baseurl%job-queues) imports to make sure the app loads them up.
+[Job Queues](%baseurl%queues) imports to make sure the app loads them up.
 
 ## Caveats
 
