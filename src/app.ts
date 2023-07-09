@@ -4,7 +4,7 @@ loadEnv()
 
 import '@/boot'
 import { pushToQueue } from '@/lib/queue'
-import { client as redisClient } from '@/lib/redis'
+import { client, client as redisClient } from '@/lib/redis'
 import { router } from '@/lib/router'
 import bodyParser from 'body-parser'
 import compression from 'compression'
@@ -17,6 +17,12 @@ import path from 'path'
 import serveStatic from 'serve-static'
 import cookieParser from 'cookie-parser'
 import { initDocs } from './docs'
+import session from 'express-session'
+import Tokens from 'csrf'
+import RedisStore from 'connect-redis'
+import { config } from './configs'
+
+const csrf = new Tokens()
 
 export const app = express()
 
@@ -25,9 +31,19 @@ export const initApp = ({ db }) => {
   app.use(cors())
 
   // Common defaults
+  app.set('view engine', 'pug')
+  app.set('views', path.join(__dirname, 'views'))
   app.disable('x-powered-by')
   app.use(morgan('tiny'))
-  app.use(helmet())
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          'script-src': ["'self'", 'unpkg.com'],
+        },
+      },
+    })
+  )
   app.use(bodyParser.urlencoded({ extended: true }))
   app.use(bodyParser.json())
   app.use(cookieParser())
@@ -38,6 +54,49 @@ export const initApp = ({ db }) => {
       },
     })
   )
+
+  let redisStore = new RedisStore({
+    client,
+    // TODO: change this to your custom prefix
+    prefix: 'thestack:',
+  })
+
+  app.use(
+    session({
+      store: redisStore,
+      resave: false, // required: force lightweight session keep alive (touch)
+      saveUninitialized: false, // recommended: only save session when data exists
+      secret: config.security.session,
+      cookie: {
+        // Requires HTTPS to work properly, better off left disabled when working
+        // in local , and can be enabled in production where HTTPS redirection is
+        // mandatory
+        secure: config.isProduction,
+      },
+    })
+  )
+
+  // Basic CSRF Handling
+  app.use((req, res, next) => {
+    const token = req.cookies['csrf-token']
+
+    if (req.method === 'GET') {
+      const secret = csrf.secretSync()
+      const secretToken = csrf.create(secret)
+      // @ts-expect-error cannot deep interface with session
+      req.session.csrfSecret = secret
+
+      res.cookie('csrf-token', secretToken)
+      res.locals.csrfToken = req.cookies['csrf-token']
+    } else {
+      // @ts-expect-error cannot deep interface with session
+      if (!csrf.verify(req.session.csrfSecret, token)) {
+        return res.status(403).send('Invalid CSRF token')
+      }
+    }
+
+    next()
+  })
 
   app.use('/public', serveStatic(path.join(__dirname, './public')))
 
