@@ -38,12 +38,14 @@ yarn install
 ## Starting the Server
 
 **Prerequisites**
+
 - Docker and Docker compose installed (if using the app with redis)
-  - If you do not plan to use redis then you should also remove the ratelimiter code in `app.ts`
+  - If you do not plan to use redis then you should also remove the ratelimiter
+    code in `app.ts`
 
-
-If you decided to keep the redis and rate limiter implementation and want to use a local redis instance 
-then run the following before running the `Dev` or `Prod` modes 
+If you decided to keep the redis and rate limiter implementation and want to use
+a local redis instance then run the following before running the `Dev` or `Prod`
+modes
 
 ```sh
 $ docker compose up # run in foreground

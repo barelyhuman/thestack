@@ -21,6 +21,7 @@ import session from 'express-session'
 import Tokens from 'csrf'
 import RedisStore from 'connect-redis'
 import { config } from './configs'
+import nunjucks from 'nunjucks'
 
 const csrf = new Tokens()
 
@@ -30,8 +31,13 @@ export const initApp = ({ db }) => {
   // TODO: configure proper cors here
   app.use(cors())
 
+  // Configure templates
+  nunjucks.configure(path.join(__dirname, 'views'), {
+    autoescape: true,
+    express: app,
+  })
+
   // Common defaults
-  app.set('view engine', 'pug')
   app.set('views', path.join(__dirname, 'views'))
   app.disable('x-powered-by')
   app.use(morgan('tiny'))
@@ -39,7 +45,7 @@ export const initApp = ({ db }) => {
     helmet({
       contentSecurityPolicy: {
         directives: {
-          'script-src': ["'self'", 'unpkg.com'],
+          'script-src': ["'self'", 'unpkg.com', 'fonts.bunny.net'],
         },
       },
     })

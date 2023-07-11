@@ -8,3 +8,4 @@ prisma/*.db
 !.env.example
 
 docs_dist
+.DS_Store

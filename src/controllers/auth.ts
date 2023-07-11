@@ -4,13 +4,18 @@ import type { Request, Response } from 'express'
 
 export default class Auth {
   @get('/login')
-  showLogin(req, res) {
-    return res.render('login.index')
+  loginView(req, res) {
+    return res.render('auth/login.njk')
   }
 
   @post('/login')
   attemptLogin(req, res: Response) {
     return res.redirect(302, '/')
+  }
+
+  @get('/register')
+  registerView(req: Request, res: Response) {
+    return res.render('auth/register.njk')
   }
 
   @post('/auth/register')
@@ -21,10 +26,4 @@ export default class Auth {
       type: config.queue.email.types.loginEmail,
     })
   }
-
-  @get('/auth/verify')
-  verify(req: Request, res: Response) {}
-
-  @get('/auth/accept')
-  accept(req: Request, res: Response) {}
 }
