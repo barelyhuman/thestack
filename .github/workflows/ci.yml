@@ -27,6 +27,7 @@ jobs:
     env:
       # these could also come from env variables of the actions if you wish for them to
       DATABASE_URL: 'postgresql://postgres:postgres@postgres:5432/tillwhen?schema=public'
+      SESSION_SECRET: 'examplesessionsecret'
     steps:
       - uses: actions/checkout@v3
       - name: Install Node.js

@@ -26,7 +26,6 @@ import { errorMiddleware } from './middlewares/errors'
 import flash from 'express-flash'
 
 const csrf = new Tokens()
-
 export const app = express()
 
 export const initApp = ({ db }) => {

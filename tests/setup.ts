@@ -1,5 +1,13 @@
+import { config as loadEnv } from 'dotenv'
 import { afterEach, beforeEach, vi } from 'vitest'
 import Redis from 'ioredis-mock'
+import { existsSync } from 'fs'
+
+if (existsSync('.env')) {
+  loadEnv({
+    path: '.env',
+  })
+}
 
 beforeEach(() => {
   vi.clearAllMocks()
