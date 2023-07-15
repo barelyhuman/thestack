@@ -71,8 +71,6 @@ class EmailQueueHandler {
   }
 ```
 
--
-
 ## Why?
 
 Various reasons....,
