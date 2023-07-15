@@ -1,10 +1,37 @@
 {% extends 'layouts/base.njk' %}
 
 {% block body %}
-  <div class="min-h-screen flex w-full items-center justify-center">
-    <a href="/login"
-      class="bg-black px-2 py-3 hover:bg-zinc-800 hover:shadow-md rounded-md text-white">
-      Get Started &rarr;
-    </a>
+  <div class="max-w-3xl flex flex-col gap-2 mx-auto">
+    {% for post in posts %}
+      <a href="/posts/{{ post.id }}/view">
+        <div class="border border-zinc-300 rounded-md hover:border-black transition-all duration-250 hover:border-2">
+          <div class="flex text-zinc-500 justify-between items-center border-b border-gray-200 p-2">
+            <div>
+              ~{{ post.user.email }}
+            </div>
+            <div>
+              {{ post.createdAt.toLocaleDateString() }}
+            </div>
+          </div>
+          <article class="p-2 pb-3">
+            {{ post.content }}
+          </article>
+        </div>
+      </a>
+    {% endfor %}
+    <div class="w-full flex items-center">
+      {% if hasPrev %}
+        <a href="/?page={{ page - 1 }}&limit={{ limit }}"
+          class="mr-auto btn secondary mini">
+          Prev
+        </a>
+      {% endif %}
+      {% if hasNext %}
+        <a href="/?page={{ page + 1 }}&limit={{ limit }}"
+          class="ml-auto btn secondary mini">
+          Next
+        </a>
+      {% endif %}
+    </div>
   </div>
 {% endblock %}

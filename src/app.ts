@@ -22,6 +22,8 @@ import Tokens from 'csrf'
 import RedisStore from 'connect-redis'
 import { config } from './configs'
 import nunjucks from 'nunjucks'
+import { errorMiddleware } from './middlewares/errors'
+import flash from 'express-flash'
 
 const csrf = new Tokens()
 
@@ -30,12 +32,6 @@ export const app = express()
 export const initApp = ({ db }) => {
   // TODO: configure proper cors here
   app.use(cors())
-
-  // Configure templates
-  nunjucks.configure(path.join(__dirname, 'views'), {
-    autoescape: true,
-    express: app,
-  })
 
   // Common defaults
   app.set('views', path.join(__dirname, 'views'))
@@ -60,6 +56,18 @@ export const initApp = ({ db }) => {
       },
     })
   )
+
+  // Flash Messages for Errors and Info on Server Rendered Templates
+  app.use(flash())
+
+  // Configure templates
+  nunjucks.configure(path.join(__dirname, 'views'), {
+    autoescape: true,
+    express: app,
+  })
+
+  // Add in helpers for REST API Errors
+  app.use(errorMiddleware)
 
   let redisStore = new RedisStore({
     client,

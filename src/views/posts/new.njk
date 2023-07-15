@@ -1,0 +1,33 @@
+{% extends 'layouts/base.njk' %}
+
+{% block body %}
+  <section class="max-w-3xl mx-auto">
+    <div class="min-h-screen flex w-full justify-center">
+      <form action="/posts" method="post" class="w-full">
+        <div class="w-full">
+          {# Tool Bar #}
+          <div class="flex w-full items-center">
+            <div class="ml-auto flex items-center gap-2 box-border">
+              <div>
+                <label>
+                  <input class="mr-2"
+                    name="published"
+                    type="checkbox" />Published
+                </label>
+              </div>
+              <button class="btn secondary">Save</button>
+            </div>
+          </div>
+          <div class="mt-5">
+            <textarea autofocus
+              class="border-2 border-zinc-300 focus:border-black w-full resize-none rounded-md"
+              name="content"
+              id=""
+              rows="10"
+              placholder="content"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+{% endblock %}

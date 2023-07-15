@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-  <div class="flex min-h-screen w-full flex-col items-center justify-center gap-2">
+  <div class="flex min-h-fit w-full flex-col items-center justify-center gap-2">
     <h2 class="text-xl font-bold">
       Register
     </h2>
-    <form class="mx-auto w-1/4">
+    <form class="mx-auto w-1/4" method="post" action="/register">
       <fieldset>
         <div class="my-2">
           <input class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
@@ -20,6 +20,12 @@
           <input type="password"
             class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
             name="password"
+            placeholder="superSecretPassword" />
+        </div>
+        <div class="my-2">
+          <input type="password"
+            class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
+            name="confirmPassword"
             placeholder="superSecretPassword" />
         </div>
       </fieldset>
@@ -43,5 +49,8 @@
         </span>
       </button>
     </form>
+    <p>
+      Already have an account? <a href="/login" class="text-zinc-400 hover:text-black hover:underline">Login</a>
+    </p>
   </div>
 {% endblock %}

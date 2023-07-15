@@ -26,9 +26,12 @@ model User {
   updatedAt DateTime @updatedAt
   email     String
   name      String?
+  password  String
+  salt      String
 
-  TeamMember    TeamMember[]
-  ProjectMember ProjectMember[]
+  TeamMember TeamMember[]
+  Tokens     Tokens[]
+  Post       Post[]
 }
 
 model TeamMember {
@@ -47,42 +50,16 @@ model TeamMember {
   teamId       Int
 }
 
-model Project {
+model Post {
   id        Int      @id @default(autoincrement())
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name          String
-  description   String?
-  deadline      DateTime?
-  ProjectMember ProjectMember[]
-  Timer         Timer[]
-}
-
-model ProjectMember {
-  id        Int      @id @default(autoincrement())
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  // Values / enum for `role` are in lib/constants
-  role Int
-
-  project   Project @relation(fields: [projectId], references: [id])
-  projectId Int
+  published Boolean
+  content   String
   user      User    @relation(fields: [userId], references: [id])
   userId    Int
-}
-
-model Timer {
-  id        Int      @id @default(autoincrement())
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  project   Project? @relation(fields: [projectId], references: [id])
-  projectId Int?
 }
 
 model Profile {
@@ -100,9 +77,9 @@ model Tokens {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name              String
-  email             String
-  authToken         String?
-  verifierToken     String?
-  registrationToken String?
+  name      String
+  authToken String?
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
 }

@@ -7,7 +7,8 @@
   },
   "prettier.documentSelectors": ["**/*.njk"],
   "emmet.includeLanguages": {
-    "jinja-html": "html"
+    "jinja-html": "html",
+    "nunjucks": "html"
   },
   "editor.quickSuggestions": {
     "strings": true

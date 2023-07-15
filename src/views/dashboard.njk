@@ -1,0 +1,70 @@
+{% extends 'layouts/base.njk' %}
+
+{% block body %}
+  <section class="max-w-3xl mx-auto">
+    <div class="min-h-screen flex w-full justify-center">
+      <div class="w-full">
+        {# Tool Bar #}
+        <div class="flex w-full items-center">
+          <div class="ml-auto box-border">
+            <a class="btn" href="/posts/new">New Post</a>
+          </div>
+        </div>
+        {# List #}
+        <div class="mt-5 flex flex-col gap-2">
+          {% if posts %}
+            {% for post in posts %}
+              <div class="border border-zinc-300 px-5 py-2.5 rounded-md">
+                <article>
+                  {{ post.content }}
+                </article>
+                <footer class="mt-2.5 pt-2 flex border-t border-t-zinc-300">
+                  <div class="mr-auto">
+                    {% if post.published %}
+                      <span class="bg-green-100 text-green-800 border-green-400 text-xs font-medium px-2.5 py-0.5 rounded border">
+                        Published | {{ post.updatedAt.toLocaleDateString() }}
+                      </span>
+                    {% else %}
+                      <span class="bg-gray-100 text-gray-800 border-gray-500 text-xs font-medium px-2.5 py-0.5 rounded border">
+                        Draft | {{ post.updatedAt.toLocaleDateString() }}
+                      </span>
+                    {% endif %}
+                  </div>
+                  <div class="ml-auto">
+                    <a class="btn mini secondary !shadow-none text-xs"
+                      href="/posts/{{ post.id }}">
+                      <span class="mr-2">View</span>
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-3 w-3 icon icon-tabler icon-tabler-arrow-right"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none"
+                          d="M0 0h24v24H0z"
+                          fill="none"></path>
+                        <path d="M5 12l14 0"></path>
+                        <path d="M13 18l6 -6"></path>
+                        <path d="M13 6l6 6"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </footer>
+              </div>
+            {% endfor %}
+          {% else %}
+            <div class="border border-zinc-200 rounded-md p-3 text-center">
+              <p>
+                No Data
+              </p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

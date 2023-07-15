@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-  <div class="flex min-h-screen w-full flex-col items-center justify-center gap-2">
+  <div class="flex min-h-fit w-full flex-col items-center justify-center gap-2">
     <h2 class="text-xl font-bold">
       Login
     </h2>
-    <form class="mx-auto w-1/4">
+    <form class="mx-auto w-1/4" method="post" action="/login">
       <fieldset>
         <div class="my-2">
           <input class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
@@ -43,5 +43,8 @@
         </span>
       </button>
     </form>
+    <p>
+      Dont have an account? <a href="/register" class="text-zinc-400 hover:text-black hover:underline">Register</a>
+    </p>
   </div>
 {% endblock %}
