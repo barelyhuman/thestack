@@ -23,7 +23,7 @@ class Auth {
 - Migrations (prisma)
 - Queue (bull + redis)
 - Decorators for Queue Handling based on Worker execution
-- View Engine ( Edge Template from Adonis )
+- View Engine ([Nunjucks](https://mozilla.github.io/nunjucks/))
 
 ```ts
 class User {
