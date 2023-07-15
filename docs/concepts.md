@@ -11,3 +11,4 @@ explanation.
 - [Routes and Middleware](%baseurl%routes)
 - [Decorators](%baseurl%decorators)
 - [Queues](%baseurl%queues)
+- [Misc](%baseurl%misc)
