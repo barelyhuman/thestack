@@ -1,10 +1,11 @@
 export const config = {
-  isTesting: process.env.NODE_ENV === 'TEST',
+  isProduction: process.env.NODE_ENV === 'production',
   app: {
     operationsEmail: 'ahoy@barelyhuman.dev',
   },
   security: {
-    jwt: process.env.JWT_TOKEN,
+    jwt: process.env.JWT_SECRET,
+    session: process.env.SESSION_SECRET,
   },
   redis: {
     host: process.env.REDIS_HOST || '127.0.0.1',

@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "ronnidc.nunjucks",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+    ]
+}

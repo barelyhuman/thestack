@@ -6,4 +6,11 @@ declare module 'express' {
     db: typeof db
     pushToQueue: typeof pushToQueue
   }
+
+  interface Response {
+    // Error response Helpers from middleware/errors.ts
+    badParameters(err: Error): void
+    serverError(err: Error): void
+    unauthorized(): void
+  }
 }

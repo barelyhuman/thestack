@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.btn {
+  @apply px-5 py-2 rounded-md border-black border-2 bg-black text-white outline-none focus:ring-4 transform duration-150 transition-colors flex items-center;
+}
+
+.btn:hover {
+  cursor: pointer;
+  @apply bg-transparent text-black;
+}
+
+.btn.secondary {
+  @apply bg-transparent text-zinc-500 border-zinc-400 hover:border-black hover:text-white hover:bg-black;
+}
+
+.btn.mini {
+  @apply px-3 py-0.5;
+}
+
+.badge {
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=Inter:400,600"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/public/styles.min.css" />
+  </head>
+  <body>
+    <header class="h-28 items-center max-w-3xl mx-auto flex justify-between">
+      <h1 class="font-bold">
+        <a href="/">Blog</a>
+      </h1>
+      <nav role="navigation"
+        aria-label="main navigation"
+        class="flex flex-wrap items-center gap-2">
+        <a class="text-zinc-400 hover:text-black" href="/">Home</a>
+        {% if authenticated %}
+          <a href="/posts" class="text-zinc-400 hover:text-black">My Posts</a>
+          <span class="text-zinc-100">|</span>
+          <a href="/logout" class="text-red-400 hover:text-red-600">Logout</a>
+        {% else %}
+          <a href="/login" class="btn mini">Login</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    {# Alerts #}
+    <div class="max-w-3xl my-2 min-h-10 mx-auto">
+      {% if messages.info %}
+        <div role="alert">
+          <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-bold">Info:</span> {{ messages.info }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if messages.error %}
+        <div class="flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+          role="alert">
+          <svg class="flex-shrink-0 inline w-4 h-4 mr-3"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+          </svg>
+          <span class="sr-only">Error</span>
+          <div>
+            <span class="font-bold">Error:</span> {{ messages.error }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    {# Alerts end #}
+
+    {% block body %}
+
+    {% endblock %}
+
+    <footer class="footer"></footer>
+  </body>
+</html>

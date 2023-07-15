@@ -1,0 +1,56 @@
+{% extends 'layouts/base.njk' %}
+
+{% block title %}
+  Register
+{% endblock %}
+
+{% block body %}
+  <div class="flex min-h-fit w-full flex-col items-center justify-center gap-2">
+    <h2 class="text-xl font-bold">
+      Register
+    </h2>
+    <form class="mx-auto w-1/4" method="post" action="/register">
+      <fieldset>
+        <div class="my-2">
+          <input class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
+            name="email"
+            placeholder="Email" />
+        </div>
+        <div class="my-2">
+          <input type="password"
+            class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
+            name="password"
+            placeholder="superSecretPassword" />
+        </div>
+        <div class="my-2">
+          <input type="password"
+            class="w-full rounded-md border border-zinc-400 px-2 py-3 focus:border-zinc-900"
+            name="confirmPassword"
+            placeholder="superSecretPassword" />
+        </div>
+      </fieldset>
+      <button class="inline-flex gap-2 w-full min-w-[150px] items-center justify-center rounded-md bg-black px-2 py-3 text-white hover:bg-zinc-800 hover:shadow-md">
+        Register
+        <span class="">
+          <svg class="h-5 w-5"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <line x1="15" y1="16" x2="19" y2="12" />
+            <line x1="15" y1="8" x2="19" y2="12" />
+          </svg>
+        </span>
+      </button>
+    </form>
+    <p>
+      Already have an account? <a href="/login" class="text-zinc-400 hover:text-black hover:underline">Login</a>
+    </p>
+  </div>
+{% endblock %}
