@@ -1,5 +1,5 @@
 import { del, get, post } from '@/lib/router'
-import { auth } from '@/middlewares/auth'
+import { auth, optionalLoggedIn } from '@/middlewares/auth'
 import type { Request, Response } from 'express'
 
 const isPostOwner = async (req: Request, res: Response, next) => {
@@ -92,7 +92,7 @@ export default class Post {
     return res.redirect(302, `/posts/${req.params.id}`)
   }
 
-  @get('/posts/:id/view')
+  @get('/posts/:id/view', [optionalLoggedIn])
   async viewPublicPost(req: Request, res: Response) {
     const postDetails = await req.db.post.findFirst({
       where: {
