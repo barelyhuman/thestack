@@ -2,6 +2,11 @@
 
 I spent the time making the decisions so you don't have to.
 
+## Documentation
+
+You can read the [docs](/docs/) folder or the
+[web version](https://barelyhuman.github.io/thestack/)
+
 ## What comes bundled
 
 - Simpler Express based server
