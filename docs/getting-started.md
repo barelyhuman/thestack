@@ -17,6 +17,14 @@ npx degit barelyhuman/thestack <your-project-name>
 > **Note**: Replace `<your-project-name>` with the folder/project-name you'd
 > like to setup
 
+- Create the basic `.env` file, you can modify values as needed but the
+  `.example` comes with dummy values that should help you get started either
+  ways
+
+```sh
+$ cp .env.example .env
+```
+
 ## Package Management
 
 You are free to use any package manager but the template comes with `pnpm` as
